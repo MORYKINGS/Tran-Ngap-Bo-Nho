@@ -1,3 +1,5 @@
+// Updated script.js file
+
 const messages = [
   "Nhớ nhớ nhớ em!"
 ];
@@ -39,4 +41,19 @@ document.addEventListener("DOMContentLoaded", function () {
   var footer = document.createElement("a");
   footer.innerHTML = encodedText; 
   document.body.appendChild(footer); 
+
+  // Automatically include the audio element and setup play functionality
+  const audioPlayer = document.createElement('audio');
+  audioPlayer.id = 'audioPlayer';
+  audioPlayer.src = './TBN.mp3';
+  document.body.appendChild(audioPlayer);
+
+  const playButton = document.createElement('button');
+  playButton.id = 'playButton';
+  playButton.textContent = 'Nhấn đây nè';
+  playButton.onclick = () => {
+    audioPlayer.play();
+    generateRandomNotifications();
+  };
+  document.body.appendChild(playButton);
 });
