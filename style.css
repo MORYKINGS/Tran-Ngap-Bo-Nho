@@ -1,3 +1,4 @@
+/* Updated style.css file with styles for Shooting Stars and Floating Bubbles */
 body {
   margin: 0;
   padding: 0;
@@ -5,9 +6,23 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #eeeeee;
+  background: linear-gradient(135deg, #001a33, #00264d, #003366, #004080); /* Gradient night sky */
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite; /* Smooth gradient transition */
   font-family: Arial, sans-serif;
   overflow: hidden;
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 h1 {
@@ -16,21 +31,16 @@ h1 {
   left: 50%;
   font-size: 50px;
   transform: translateX(-50%);
+  color: #ff4081; /* Vibrant header color */
 }
-a {
-  position: fixed;
-  bottom: 0;
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-}
+
 button {
   position: absolute;
   z-index: 1;
   padding: 15px 30px;
   font-size: 18px;
   font-family: 'Arial', 'Helvetica', sans-serif;
-  background-color: #0a2b57;
+  background-color: #6200ea; /* Purple color for button */
   color: white;
   border: none;
   border-radius: 5px;
@@ -38,22 +48,23 @@ button {
 }
 
 button:hover {
-  background-color: #1b53a7;
+  background-color: #3700b3; /* Darker purple on hover */
 }
 
 .notification {
   position: absolute;
-  width: 240px;
+  width: 260px;
   height: 160px;
-  background-color: #FFB6C1;
-  color: rgb(0, 0, 0);
+  background-color: #fff3e0; /* Warm notification background */
+  color: #4e342e; /* Dark text color */
   font-size: 16px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   z-index: 2;
-  border: 4px solid #ffffff;
+  border: 4px solid #ffcc80; /* Accent border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .notification-header {
@@ -62,15 +73,15 @@ button:hover {
   align-items: center;
   width: 100%;
   padding: 5px;
-  background-color: #ffffff;
+  background-color: #ffe0b2; /* Slightly darker header */
   border-radius: 5px 5px 0 0;
-  color: white;
+  color: #5d4037;
   font-weight: bold;
   box-sizing: border-box;
 }
 
 .notification-header span {
-  color: rgb(0, 0, 0);
+  color: #4e342e; /* Text color for header */
   font-family: 'Arial', 'Helvetica', sans-serif;
   text-align: center;
   flex-grow: 1;
@@ -95,7 +106,7 @@ button:hover {
   padding: 5px;
   background-color: transparent;
   border: none;
-  color: rgb(0, 0, 0);
+  color: #6d4c41; /* Button color */
   margin-left: auto;
 }
 
@@ -103,14 +114,90 @@ button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
+.glitter-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows interaction with underlying elements */
+  overflow: hidden;
+  z-index: 999;
+}
 
-  to {
+.glitter {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #ffe082 0%, #ffffff 100%); /* Glitter gradient */
+  border-radius: 50%;
+  animation: fall 5s infinite; /* Falling animation */
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px);
     opacity: 1;
-    transform: scale(1);
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  width: 8px; /* Star width */
+  height: 8px; /* Star height */
+  background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)); /* Bright glowing star */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Add a glow effect */
+  animation: shooting 2s ease-in-out infinite; /* Smooth animation */
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+@keyframes shooting {
+  0% {
+    left: -10%; /* Start off-screen left */
+    top: 30%; /* Random vertical position */
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1; /* Full opacity mid-flight */
+  }
+  100% {
+    left: 110%; /* End off-screen right */
+    top: 70%; /* Slightly random vertical position */
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0; /* Fade out */
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: -50px;
+  width: 30px; /* Tăng kích thước mặc định */
+  height: 30px; /* Tăng kích thước mặc định */
+  background: rgba(173, 216, 230, 0.6); /* Màu xanh nhạt */
+  border: 2px solid rgba(255, 255, 255, 0.8); /* Viền trắng sáng */
+  border-radius: 50%;
+  animation: float 12s linear infinite;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm đổ bóng để nổi bật hơn */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8; /* Hiện rõ khi bắt đầu */
+  }
+  50% {
+    opacity: 1; /* Hiện rõ nhất giữa đường đi */
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0; /* Mờ dần khi bay lên cao */
   }
 }
